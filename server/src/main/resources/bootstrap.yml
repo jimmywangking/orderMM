@@ -1,0 +1,69 @@
+spring:
+  application:
+    name: order
+#  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+#        service-id: CONFIG
+#      profile: test
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/SpringCloud_Sell?characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  redis:
+    host: localhost
+    port: 6379
+  cloud:
+    stream:
+      bindings:
+        myMessage:
+          group: order
+          content-type: application/json
+  zipkin:
+    base-url: http://localhost:9411
+    sender:
+      type: web
+  sleuth:
+    sampler:
+#      percentage: 1
+      probability: 1
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/, http://localhost:8762/eureka/
+  instance:
+    prefer-ip-address: true
+env: test1
+laptop:
+  brand: Apple
+  model: MacBook-Pro 15
+  price: 80000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+    getProductInfoList:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+feign:
+  hystrix:
+    enabled: true
+management:
+  context-path: /
+logging:
+  level:
+    org.springframework.cloud.openfeign: debug
